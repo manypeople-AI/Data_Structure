@@ -12,7 +12,7 @@ int main(void)
     int result = 0;
     while(1){
         printf("정수를 입력해주세요: ");
-        scanf("%d", &num1); // �엯�젰�쓣 諛쏆븘�꽌 蹂��닔�뿉 ����옣
+        scanf("%d", &num1); // 정수값 받아서 변수에 저장하기
         if(num1<0)continue; 
         if(num1>=0)break;
     }
