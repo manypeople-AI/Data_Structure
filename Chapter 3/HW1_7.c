@@ -9,7 +9,7 @@ int main() {
 }
 
 int reversestring(str){
-    int len = len(str);
+    int len = (str);
 
 
 }
