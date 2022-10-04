@@ -7,13 +7,9 @@ int main()
 
     numPtr = &num1;   // num1의 메모리 주소를 포인터 변수에 저장
 
-    //printf("%p\n", numPtr);    // 0055FC24: 포인터 변수 numPtr의 값 출력
+    printf("%p\n", numPtr);    // 0055FC24: 포인터 변수 numPtr의 값 출력
                                // 컴퓨터마다, 실행할 때마다 달라짐
     //printf("%p\n", &num1);     // 0055FC24: 변수 num1의 메모리 주소 출력
-                               // 컴퓨터마다, 실행할 때마다 달라짐
 
-    printf("%u\n", sizeof(numPtr));    // 4: 32비트에서 int 포인터는 4바이트
-
-    printf("%u\n", sizeof(char *));    // 4: 32비트에서 char 포인터는 4바이트
     return 0;
 }
