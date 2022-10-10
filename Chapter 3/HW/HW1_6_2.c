@@ -14,6 +14,5 @@ int main(){
 
     printf("%c ",*(str2+2)); // y
 
-
 	return 0;
 }
