@@ -41,7 +41,7 @@ void poly_add(int As, int Ae, int Bs, int Be, int *Cs, int *Ce){
                 As++;   break;
             case '=': //A의 차수 = B의 차수
                 tempcoef = terms[As].coef+terms[Bs].coef;
-                if (tempcoef){
+                if (tempcoef){ //계수가 0일때는 빼려고?
                     attach(tempcoef, terms[As].expon);
                 }
                 As++;
@@ -52,20 +52,13 @@ void poly_add(int As, int Ae, int Bs, int Be, int *Cs, int *Ce){
         }
         // As<=Ae 와 Bs<=Be 조건을 모두 만족하지 않으면 while문 나오기 때문에
         // 그런 경우 남아있는 것들을 넘겨주어야한다
-
-        if (As<=Ae){
-            for (int i=0;i<=Ae;i++){
+        for (;As<=Ae;As++){
                 attach(terms[As].coef, terms[As].expon);
-                As++;
-            }}
-        else if (Bs<=Be){
-            for (int i=0;i<=Be;i++){
-                attach(terms[Bs].coef, terms[Bs].expon);
-                Bs++;}
         }
-        
-
-    }
+        for (;Bs<=Be;Bs++){
+            attach(terms[Bs].coef, terms[Bs].expon);
+        }
+        *Ce = avail-1; //ce는 avail -1을 가리킴
 }
 
 

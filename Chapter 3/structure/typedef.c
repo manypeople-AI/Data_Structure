@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h> //strcpy 사용하려면 필요
 
-typedef struct studentTag{ //typedef를 이용해 구조체를 새로운 타입으로 선언
+typedef struct{ //typedef를 이용해 구조체를 새로운 타입으로 선언
     char name[10];
     int age;
     double gpa;
