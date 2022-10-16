@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef int element;
+#include <string.h>
+typedef struct{
+    char name[100];
+}element;
 
 //노드의 구조 정의(not 생성)
-typedef struct ListNode
+typedef struct ListNode //구조체이름
 {
     element data; // Data Field
     struct ListNode *link; // link field : 포인터가 들어감
-}ListNode;
+}ListNode;//구조체 별칭
 
 // ListNode *p = NULL; //현재 아무것도 가리키고 있지 않은 상태
 // p = (ListNode *)malloc(sizeof(ListNode)); //
@@ -55,9 +57,7 @@ ListNode* delete(ListNode *head, ListNode *pre){
 void print_list(ListNode* head){
     int len=0;
     for (ListNode* p=head;p!=NULL;p = p->link){
-        printf("%d -> ",p->data);
-        len += 1;
-        printf("  %d",len);
+        printf(" %s -> ",p->data.name); // p->data.name 주의!!!
     }
     printf("NULL \n");
     
@@ -65,14 +65,29 @@ void print_list(ListNode* head){
 
 int main (void){
     ListNode *head = NULL;
+    element data;
 
-    for (int i = 0;i<5;i++){
-        head = insert_first(head,i);
-        print_list(head);
-    }
-    for (int i = 0; i<5;i++){
-        head = delete_first(head);
-        print_list(head);
-    }
+    strcpy(data.name,"apple");
+    head = insert_first(head,data);
+    print_list(head);
+
+    strcpy(data.name,"kiwi");
+    head = insert_first(head,data);
+    print_list(head);
+
+    strcpy(data.name,"banana");
+    head = insert_first(head,data);
+    print_list(head);
+
+
     return 0;
 }
+
+
+
+
+
+
+
+
+

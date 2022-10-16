@@ -1,16 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct{
-    char name[100]
-}element;
+#include <string.h>
+typedef int element;
 
 //노드의 구조 정의(not 생성)
-typedef struct ListNode //구조체이름
+typedef struct ListNode
 {
     element data; // Data Field
     struct ListNode *link; // link field : 포인터가 들어감
-}ListNode;//구조체 별칭
+}ListNode;
 
 // ListNode *p = NULL; //현재 아무것도 가리키고 있지 않은 상태
 // p = (ListNode *)malloc(sizeof(ListNode)); //
@@ -54,10 +52,25 @@ ListNode* delete(ListNode *head, ListNode *pre){
 }
 //print_list 함수
 
+ListNode* search_list(ListNode *head, element x){
+    for (ListNode* p=head;p!=NULL;p = p->link){
+        if (p->data == x)
+        {
+            printf("find!!!!!\n");
+            return p;
+        }
+    }
+    printf("nope..\n");
+    return NULL;
+}
+
+
 void print_list(ListNode* head){
     int len=0;
     for (ListNode* p=head;p!=NULL;p = p->link){
-        printf("num: %s -> ",p->data);
+        printf("num: %d -> ",p->data);
+        len += 1;
+        printf("  %d",len);
     }
     printf("NULL \n");
     
@@ -66,14 +79,13 @@ void print_list(ListNode* head){
 int main (void){
     ListNode *head = NULL;
 
-    for (int i = 0;i<5;i++){
-        head = insert_first(head,i);
-        print_list(head);
+    head = insert_first(head,10);
+    if (search_list(head,30)!= NULL){
+        printf("hh");
     }
-    for (int i = 0; i<5;i++){
-        head = delete_first(head);
-        print_list(head);
-    }
+    else
+        printf("kkk");
+
     return 0;
 }
 
