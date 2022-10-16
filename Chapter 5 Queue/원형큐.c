@@ -22,21 +22,24 @@ void init_queue(QueueType *q){
     q -> front = 0;
 }
 
+//is_empty
+int is_empty(QueueType *q){
+    return (q->front == q->rear);
+}
 //queue print
 void queue_print(QueueType *q){
-    int i=q->front;
-    while(i<=q->rear){
-        if (i == MAX_QUEUE_SIZE){
-            i=0;
-            printf("%d | " ,q->data[i]);
-            i++;}
-        else{   
-            printf("%d | ",q->data[i]);
-            i++;
-        }
+    printf("Queue (front = %d, rear = %d) = ", q->front, q->rear);
+    if (!is_empty(q)){
+        int i=q->front;
+        do {
+            i = (i+1)%MAX_QUEUE_SIZE;
+            printf("%d | ", q->data[i]);
+            if (i==q->rear){
+                break;
+            }
+        }while (i!=q->front);
     }
-    printf("\n");
-
+    printf("\n");    
 }
 
 //is_full
@@ -44,45 +47,26 @@ int is_full(QueueType *q){
     return ((q->rear+1)%MAX_QUEUE_SIZE == q->front);
 }
 
-//is_empty
-int is_empty(QueueType *q){
-    return (q->front == q->rear);
-}
 
 //enqueue
-
 void enqueue(QueueType *q, int item){
     // 큐는 맨 뒤에 삽입
-    if (is_full(q)) {
-        error("queue is full");
-        return;}
-    else{
-        if (q->rear == MAX_QUEUE_SIZE-1){
-            q->data[0] = item;
-            q->rear = 0;
-        }
-        else{
-            q-> data[q->rear+1] = item;
-            q-> rear++;
-        }
+    if (is_full(q)){
+        error("Que is full");
     }
+    q->rear= q->rear+1%MAX_QUEUE_SIZE;
+    q->data[q->rear] = item;
 }
 
 int delqueue(QueueType *q){
-    int item;
-    if (is_empty(q)) {
-        error("queue is empty");
-        return -1;}
-    else{
-        if (q->front == MAX_QUEUE_SIZE){
-            item= q-> data[0];
-            q->front = 0;} // 맨 앞에 있는 데이터 빼주기 front 는 맨앞에 있는 데이터가 아니고 그 전임.
-        else{
-            item= q-> data[++(q->front)];
-            q->front++;}}
+    if (is_empty(q)){
+        error("Que is empty");
+    }
 
-    return item;
-    
+    q->front = q->front+1%MAX_QUEUE_SIZE;
+    int item = q->data[q->front];
+
+    return item;    
 }
 
 int main(void){
