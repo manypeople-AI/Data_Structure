@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 #define MAX_QUEUE_SIZE 5
 
 typedef int element;
@@ -8,7 +9,7 @@ typedef struct{
     int front;
     int rear;
     element data[MAX_QUEUE_SIZE];
-}QueueType; // 큐타입 
+}QueueType; // 큐타입
 
 //오류 함수
 void error(char *message){
