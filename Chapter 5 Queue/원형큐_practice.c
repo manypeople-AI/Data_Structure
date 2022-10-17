@@ -18,24 +18,42 @@ void error(char *message){
 }
 
 //init_queue 큐 초기화
-void init_queue(QueueType *q){
-
+void init_queue(QueueType *q){  
+    q-> front = 0;
+    q-> rear = 0;
 }
 
 //is_empty
 int is_empty(QueueType *q){
-
+    if (q->front == q->rear)
+        return 1;
+    else
+        return 0;
 }
-//queue print
-void queue_print(QueueType *q){
 
-    printf("\n");    
-}
 
 //is_full
 int is_full(QueueType *q){
-
+    // full인 경우에는 rear가 front보다 1 작음
+    return ((q->rear+1)%MAX_QUEUE_SIZE == q->front);
 }
+
+//queue print
+void queue_print(QueueType *q){
+    printf("Queue (front = %d, rear = %d) = ", q->front, q->rear);
+    if (!is_empty(q)){
+        int i=q->front;
+        do {
+            i = (i+1)%MAX_QUEUE_SIZE;
+            printf("%d | ", q->data[i]);
+            if (i==q->rear){
+                break;
+            }
+        }while (i!=q->front);
+    }
+    printf("\n");    
+}
+
 
 
 //enqueue
@@ -44,7 +62,7 @@ void enqueue(QueueType *q, int item){
 }
 
 int delqueue(QueueType *q){
-    
+
 }
 
 int main(void){
