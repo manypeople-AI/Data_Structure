@@ -6,5 +6,13 @@ int fib_iter(int n){
 
     int pp=0;
     int p =1;
-    int re
+    int result = 0;
+
+    for (int i=2;i<=n;i++){
+        result = p+pp;
+        pp = p;
+        p = result;
+
+    }
+    return result;
 }

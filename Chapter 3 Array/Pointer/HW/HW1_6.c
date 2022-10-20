@@ -7,6 +7,9 @@ int main()
 	char str[10] = "Fryends"; 
     char *p = str;
 
+	printf("%c ",(*p+1));
+	printf("%c ",*(p+2));
+
 	*(p + 2) = 'i';
 	printf("%s ", str);
 	return 0;

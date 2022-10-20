@@ -2,7 +2,7 @@
 
 int main(){
 
-    char* str= "Fryends"; //포인터 str은 "fryends"라는 문자열을 가리키는 포인터
+    char* str= "helloworld"; //포인터 str은 "fryends"라는 문자열을 가리키는 포인터
     //str은 문자열 fryends의 주소를 가리킴
     
     printf("%c ",(*str+2)); // H 출력
