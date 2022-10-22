@@ -26,7 +26,7 @@ int main(){
     printf("%d\n",sizeof(s->age));//4
     s->gpa = 4.5;
     printf("%d\n",sizeof(s->gpa));//8
-    printf("%d\n",sizeof(*s));
+    printf("%d\n",sizeof(*s)); // 4
     free(s);
     return 0;
 

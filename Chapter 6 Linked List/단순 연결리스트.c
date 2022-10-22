@@ -59,8 +59,7 @@ void print_list(ListNode* head){
         len += 1;
         printf("  %d",len);
     }
-    printf("NULL \n");
-    
+    printf("NULL \n");   
 }
 
 int main (void){
