@@ -12,7 +12,7 @@ typedef struct {
     int top;
 }StackType;
 
-//스택 초기화 함수
+//스택 초기화 함수S
 void init_stack(StackType *s){
     s->top = -1; //구조체의 element를 접근하기 위해 ->를 사용 접근지시자 
     //s의 top을 -1로 설정하겠음
@@ -72,7 +72,7 @@ int prec(char op){
 }
 
 // 중위표기 수식 -> 후위표기 수식
-void infix_to_profix(char exp[]){
+void infix_to_profix(char exp[]){ 
     StackType s;
     StackType s2;
     init_stack(&s);
@@ -134,10 +134,6 @@ void infix_to_profix(char exp[]){
         printf("%c",pop(&s));
     }
 
-    // 바닥부터 출력해야한다
-//     for (;is_empty(&s2)!=1;){
-//         printf("%c",pop(&s2));
-//     }
 }
 
 //main문

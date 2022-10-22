@@ -56,8 +56,6 @@ void print_list(ListNode* head){
     int len=0;
     for (ListNode* p=head;p!=NULL;p = p->link){
         printf("num: %d -> ",p->data);
-        len += 1;
-        printf("  %d",len);
     }
     printf("NULL \n");   
 }
