@@ -32,26 +32,14 @@ TreeNode *pop(){ //인자를 안받음 stack을 전역 변수로 선언해서?
 
 //inorder_iter
 void inorder_iter(TreeNode *root){
-    for(TreeNode *p=root->right;p!=NULL;p->right){
-        if (p->right->right = NULL){
-            push(p->right);
-            push(p);
-            push(p->left);
-        }               
+    while(1){
+        for(;root;root=root->left)
+            push(root);
+        root = pop();
+        if(!root) break; // pop 했는데 아무것도 없으면 break 즉 root가 null이면!
+        printf(" [%d] ", root->data);
+        root = root->right;
     }
-    push(root);
-    for(TreeNode *p=root->left;p!=NULL;p->left){
-        if (p->left->right = NULL){
-            push(p->right);
-            push(p);
-            push(p->left);
-        }         
-}
-    for (;top=-1;){
-        TreeNode *a = pop();
-        printf(" [%d] ",a->data);
-    }
-
 }
 //    15
 //  4    20
