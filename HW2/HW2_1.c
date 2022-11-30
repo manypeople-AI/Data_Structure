@@ -12,10 +12,7 @@ Node* BTree2DoublyLinkedList(Node* root, Node** head)
     // Base case
     if (root == NULL)
         return root;
- 
-    // Initialize previously visited node as NULL. This is
-    // static so that the same value is accessible in all
-    // recursive calls
+
     static Node* prev = NULL;
  
     // Recursively convert left subtree
