@@ -7,21 +7,6 @@ typedef struct Node{
     struct Node *left, *right;
 }Node;
 
-Node* make_tree(int arr[]){
-    //                   arr[0](n4)
-    //        arr[1](n3)            arr[2](n6)
-    //  arr[3](n1)  arr[4](n2)   arr[5](n5)
-    Node n1 = {arr[3], NULL, NULL};
-    Node n2 = {arr[4], NULL, NULL};
-    Node n3 = {arr[1], &n1, &n2};
-    Node n5 = {arr[5], NULL, NULL};
-    Node n6 = {arr[2], &n5 ,NULL};
-    Node n4 = {arr[0], &n3, &n6};
-    Node *root = &n4;
-
-    return root;
-}
-
 Node* BTree2DoublyLinkedList(Node* root, Node** head)
 {
     // Base case
