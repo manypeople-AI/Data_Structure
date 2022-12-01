@@ -74,12 +74,12 @@ void heap_sort(element a[],int n){
 #define SIZE 8
 int main(void){
     int k;
-    int count=1; //count는 unique한 숫자들의 개수 이 개수가 k와 같아지면 stop
+    int count=1; //count는 unique한 숫자들의 개수 이 개수가 k보다 작아지면 stop
     int temp = 0;
     printf("Enter the k = "); 
     scanf("%d", &k);
     
-    element list[SIZE] = {-1,-23,-2,-30,-2,-23,-50,-50};
+    element list[SIZE] = {1,23,12,9,30,2,23,50};
     heap_sort(list,SIZE);
 
     printf("The result is ");
@@ -95,9 +95,3 @@ int main(void){
 
     return 0;
 }
-
-
-
-
-
-

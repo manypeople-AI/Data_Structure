@@ -1,34 +1,31 @@
-/* A program to convert Binary Tree to Binary Search Tree */
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
 
-/* A binary tree Node structure */
 typedef struct Node{
     int data;
     struct Node *left, *right;
 }Node;
 
-/* A helper function that stores inorder traversal of a tree rooted
-with Node */
+/// tree 루트의 inorder traversal을 저장하는 함수
 void storeInorder(Node* Node, int inorder[], int* index_ptr)
 {
-	// Base Case
+	
 	if (Node == NULL)
 		return;
 
-	/* first store the left subtree */
+	// 먼저 왼쪽 하위 트리를 저장 
 	storeInorder(Node->left, inorder, index_ptr);
 
-	/* Copy the root's data */
+	// 루트 데이터 복사 
 	inorder[*index_ptr] = Node->data;
 	(*index_ptr)++; // increase index for next entry
 
-	/* finally store the right subtree */
+	// 마지막으로 올바른 하위 트리 저장
 	storeInorder(Node->right, inorder, index_ptr);
 }
 
-/* A helper function to count nodes in a Binary Tree */
+// 이진 트리에서 노드를 세는 도우미 함수
 int countNodes(Node* root)
 {
 	if (root == NULL)
@@ -36,60 +33,53 @@ int countNodes(Node* root)
 	return countNodes(root->left) + countNodes(root->right) + 1;
 }
 
-// Following function is needed for library function qsort()
+
 int compare(const void* a, const void* b)
 {
 	return (*(int*)a - *(int*)b);
 }
 
-/* A helper function that copies contents of arr[] to Binary Tree.
-This function basically does Inorder traversal of Binary Tree and
-one by one copy arr[] elements to Binary Tree nodes */
+// arr[]의 내용을 Binary Tree로 복사하는 도우미 함수.이 함수는 기본적으로 Binary Tree의 Inorder 순회를 수행하고 
+// arr[] 요소를 이진 트리 노드에 하나씩 복사
 void arrayToBST(int* arr, Node* root, int* index_ptr)
 {
-	// Base Case
 	if (root == NULL)
 		return;
 
-	/* first update the left subtree */
+	// 먼저 왼쪽 하위 트리 업데이트
 	arrayToBST(arr, root->left, index_ptr);
 
-	/* Now update root's data and increment index */
+	// 이제 루트의 데이터를 업데이트하고 인덱스를 증가
 	root->data = arr[*index_ptr];
 	(*index_ptr)++;
 
-	/* finally update the right subtree */
+	// 하위 트리 업데이트
 	arrayToBST(arr, root->right, index_ptr);
 }
 
-// This function converts a given Binary Tree to BST
 void binaryTreeToBST(Node* root)
 {
-	// base case: tree is empty
+	
 	if (root == NULL)
 		return;
 
-	/* Count the number of nodes in Binary Tree so that
-	we know the size of temporary array to be created */
+
 	int n = countNodes(root);
 
-	// Create a temp array arr[] and store inorder traversal of tree in arr[]
 	int* arr = (int *)malloc(sizeof(int)*10);
 	int i = 0;
 	storeInorder(root, arr, &i);
 
-	// Sort the array using library function for quick sort
+	
 	qsort(arr, n, sizeof(arr[0]), compare);
 
-	// Copy array elements back to Binary Tree
 	i = 0;
 	arrayToBST(arr, root, &i);
 
-	// delete dynamically allocated memory to avoid memory leak
 	free(arr);
 }
 
-/* Utility function to create a new Binary Tree Node */
+
 Node* newNode(int data)
 {
 	Node* temp =(Node*)malloc(sizeof(Node));
@@ -99,40 +89,29 @@ Node* newNode(int data)
 	return temp;
 }
 
-/* Utility function to print inorder traversal of Binary Tree */
 void printInorder(Node* Node)
 {
 	if (Node == NULL)
 		return;
 
-	/* first recur on left child */
+
 	printInorder(Node->left);
-
-	/* then print the data of Node */
 	printf("%d ", Node->data);
-
-	/* now recur on right child */
 	printInorder(Node->right);
 }
 
-/* Driver function to test above functions */
+
 int main()
 {
 	Node* root = NULL;
 
-	/* Constructing tree given in the above figure
-		10
-		/ \
-		30 15
-	/	 \
-	20	 5 */
 	root = newNode(10);
 	root->left = newNode(30);
 	root->right = newNode(15);
 	root->left->left = newNode(20);
 	root->right->right = newNode(5);
 
-	// convert Binary Tree to BST
+	// 변환함수
 	binaryTreeToBST(root);
 
 	printf("Following is Inorder Traversal of the converted BST: \n");

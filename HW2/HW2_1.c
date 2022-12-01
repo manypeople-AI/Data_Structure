@@ -7,18 +7,18 @@ typedef struct Node{
     struct Node *left, *right;
 }Node;
 
-Node* BTree2DoublyLinkedList(Node* root, Node** head)
+Node* BTree2DLL(Node* root, Node** head)
 {
-    // Base case
+    // root가 null인 경우
     if (root == NULL)
         return root;
 
     static Node* prev = NULL;
  
-    // Recursively convert left subtree
-    BTree2DoublyLinkedList(root->left, head);
+    // 왼쪽 하위 트리를 재귀적으로 변환
+    BTree2DLL(root->left, head);
  
-    // Now convert this node
+    // 현재 노드 변환
     if (prev == NULL)
         *head = root;
     else {
@@ -27,19 +27,19 @@ Node* BTree2DoublyLinkedList(Node* root, Node** head)
     }
     prev = root;
  
-    // Finally convert right subtree
-    BTree2DoublyLinkedList(root->right, head);
+    //최종적으로 오른쪽 하위 트리 변환
+    BTree2DLL(root->right, head);
     return prev;
 }
 
-Node* BTree2CircularDoublyLinkedList(Node* root)
+Node* BTree2CDLL(Node* root)
 {
     Node* head = NULL;
-    Node* tail = BTree2DoublyLinkedList(root, &head);
-    // make the changes to convert a DLL to CDLL
+    Node* tail = BTree2DLL(root, &head);
+    // DLL을 CDLL로 변환하도록 변경
     tail->right = head;
     head->left = tail;
-    // return the head of the created CDLL
+   
     return head;
 }
 
@@ -49,7 +49,7 @@ void print_node(Node* phead){
         return;
     Node* p = phead;
     do{
-        printf("<-|  |%d|  |-> ",p->data);
+        printf("<-|%d|-> ",p->data);
         p=p->right;
     }while(p!=phead);
     printf("\n");
@@ -65,18 +65,18 @@ Node* newNode(int data)
 
 int main()
 {
-    // Let us create the tree shown in above diagram
-    Node* root = newNode(10);
-    root->left = newNode(12);
-    root->right = newNode(15);
-    root->left->left = newNode(25);
-    root->left->right = newNode(30);
-    root->right->left = newNode(36);
+    // 완전이진트리 구조 생성
+
+    Node* root = newNode(11);
+    root->left = newNode(13);
+    root->right = newNode(16);
+    root->left->left = newNode(26);
+    root->left->right = newNode(31);
+    root->right->left = newNode(37);
  
-    
-    // Convert to DLL
-    Node* head = BTree2CircularDoublyLinkedList(root);
-    // Print the converted list
+    // 변환
+    Node* head = BTree2CDLL(root);
+    // 최종 리스트 반환
     print_node(head);
  
     return 0;
