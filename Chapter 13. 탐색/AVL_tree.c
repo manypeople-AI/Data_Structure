@@ -21,15 +21,13 @@ AVLNode *rotate_right(AVLNode *parent){
 // Rotate Left 함수 구현
 AVLNode *rotate_left(AVLNode *parent){
     AVLNode* child = parent->right;
-    parent->right  = child->left;//원래는 child를 가리키고 있었으므로, null값을 넣어줌        
+    parent->right  = child->left;//원래는 child를 가리키고 있었으므로, null값을 넣어줌
     child->left = parent;
-
     return child; // 새 루트를 반환
 }  
 
 // 트리의 높이 계산
 int get_height(AVLNode *node){
-
     int height = 0;
 
     if(node!=NULL)
@@ -65,18 +63,26 @@ AVLNode* insert(AVLNode* node, int key){//key: 추가하고자 하는 값, node 
 
     // LL타입 처리 // 왼쪽으로 쭈루룩 쏠린 불균형 상태
     if (balance>1 && key<node->left->key) // 왼쪽으로 쏠린 불균형 상태가 추가로 인해서 발생했어!
-
+        return rotate_left(node); //parent는 현재 node
 
     // RR타입 처리
-    if (get_balance(node)<-1)
+    if (balance<-1 && key>node->right->key)
+        return rotate_right(node);
 
     // LR타입 처리
+    if (balance>1 && key>node->left->key)
+        {node->left = rotate_left(node->left); //회전한 child가 node->left이다
+        return rotate_right(node);}  //한번 더 회전
 
     // RL타입 처리
-
-    
+    if (balance<-1 && key<node->right->key){
+        node->right = rotate_right(node->right);
+        return rotate_left(node);
+    }
     return node;
 }
+
+
 
 
 
