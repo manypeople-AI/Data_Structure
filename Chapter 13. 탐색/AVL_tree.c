@@ -71,7 +71,8 @@ AVLNode* insert(AVLNode* node, int key){//key: 추가하고자 하는 값, node 
 
     // LR타입 처리
     if (balance>1 && key>node->left->key)
-        {node->left = rotate_left(node->left); //회전한 child가 node->left이다
+        {
+        node->left = rotate_left(node->left); //회전한 child가 node->left이다
         return rotate_right(node);}  //한번 더 회전
 
     // RL타입 처리
