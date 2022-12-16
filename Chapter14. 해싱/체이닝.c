@@ -19,3 +19,16 @@ int hash_function(int key){
 }
 
 // 체인법을 이용하여 테이블에 키를 삽입
+void hash_chain_add(element item, struct list *ht[]){
+    
+
+
+
+
+
+}
+
+
+
+
+

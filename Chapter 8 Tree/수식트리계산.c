@@ -44,9 +44,6 @@ int evaluate(TreeNode *root){
             }
     }
     return 0;
-
-
-
 }
 
 //main 문
